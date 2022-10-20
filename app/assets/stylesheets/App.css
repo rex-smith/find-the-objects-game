@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+body {
+  text-align: left;
+  font-family: "Rubik", sans-serif;
+}
+
+h1 {
+  color: dodgerblue;
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: dodgerblue;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+h3 {
+  color: dodgerblue;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+p {
+  color: gray;
+  margin-bottom: 5px;
+  line-height: 24px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: dodgerblue;
+  color: black;
+  font-size: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 5px dodgerblue;
+}
+
+.nav-brand {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.brand-name {
+  font-style: italic;
+  font-weight: 900;
+  font-size: 40px;
+}
+
+.nav-menu {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.nav-menu-item {
+  transition: 0.4s ease-in-out;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0px 10px;
+}
+
+.nav-menu-item:hover {
+  background-color: black;
+  color: dodgerblue;
+  border: 2px solid dodgerblue;
+}
+
+.main-container {
+  margin: 0 auto;
+  width: 300px;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 20px;
+  text-align: center;
+  transition: 0.2s ease-in;
+  padding: 10px 15px;
+  color: white;
+  background-color: dodgerblue;
+  border: none;
+}
+
+.button:hover {
+  color: dodgerblue;
+  background-color: white;
+  border: 2px solid dodgerblue;
+}
+
+@media screen and (min-width: 500px) {
+  .main-container {
+    width: 500px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .main-container {
+    width: 900px;
+  }
+}
+
+/* Home */
+
+/* Game */
+
+/* Image */
+
+#image-container {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px dodgerblue;
+  position: relative;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+  display: block;
+  /* object-fit: fit; */
+}
