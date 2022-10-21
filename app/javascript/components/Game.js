@@ -5,43 +5,45 @@ import EndRoundModal from "./EndRoundModal.js";
 import Images from "./images/index";
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/v1/images";
+// const API_URL = "api/v1/games";
 
-function getAPIData() {
-  return axios.get(API_URL).then((response) => response.data);
-}
+// function getAPIData() {
+//   return axios.get(API_URL).then((response) => response.data);
+// }
 
 const Game = () => {
-  const [imageId, setImageId] = useState(0);
+  const [imageId, setImageId] = useState(1);
   const [image, setImage] = useState(Images[0]);
   const [roundOver, setRoundOver] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(true);
 
   const getImage = (id) => {
-    return Images.filter((image) => image.id === id);
+    return Images.find((image) => image.id === id - 1);
   };
 
   useEffect(() => {
     let mounted = true;
-    getAPIData().then((item) => {
-      if (mounted) {
-        setImage(item);
-      }
-    });
-    return () => (mounted = false);
-  }, []);
+    // getAPIData().then((item) => {
+    //   if (mounted) {
+    //     setImage(item);
+    //   }
+    // });
+    setImage(getImage(imageId));
+  }, [imageId]);
 
   const handleRoundFinish = () => {
     toggleTimer();
     // Send result to database first
     setRoundOver(true);
   };
-
   const nextRound = () => {
     // Rotate through list of pictures fetching from server by ID
-    setImageId((imageId) => imageId + 1);
-    setImage(getImage(imageId));
+    if (imageId < Images.length - 1) {
+      setImageId((imageId) => imageId + 1);
+    } else {
+      setImageId(1);
+    }
 
     // Fetch image, character locations
     setRoundOver(false);
@@ -72,15 +74,24 @@ const Game = () => {
 
   return (
     <div>
-      <h1>{image.title}</h1>
-      <h3>{image.prompt}</h3>
-      <div className="timer-container">
-        <div className="time">{seconds}s</div>
+      <div className="title-timer-container">
+        <h1>{image.title}</h1>
+        <div className="timer-container">
+          <div className="time">{seconds}s</div>
+        </div>
       </div>
-      <Image image={image.image} handleRoundFinish={handleRoundFinish} />
+      <h3>{image.prompt}</h3>
+      <Image
+        image={image.image}
+        id={imageId}
+        handleRoundFinish={handleRoundFinish}
+      />
       {roundOver ? (
         <EndRoundModal timeResult={seconds} nextRound={nextRound} />
       ) : null}
+      <button className="button" onClick={nextRound}>
+        Next Picture
+      </button>
     </div>
   );
 };

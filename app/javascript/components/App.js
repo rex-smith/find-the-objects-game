@@ -1,7 +1,7 @@
 import { Outlet, NavLink } from "react-router-dom";
 import React from "react";
 // import "./styles/App.css";
-import "../../assets/stylesheets/App.css";
+import "../../assets/stylesheets/styles.css";
 
 function App() {
   return (

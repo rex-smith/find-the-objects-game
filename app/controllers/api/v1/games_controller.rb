@@ -1,4 +1,4 @@
-class GamesController < ApplicationController
+class Api::V1::GamesController < ApplicationController
   before_action :set_game, only: %i[ show edit update destroy ]
 
   # GET /games or /games.json
@@ -8,6 +8,11 @@ class GamesController < ApplicationController
 
   # GET /games/1 or /games/1.json
   def show
+    if @game
+      render json: @game.characters
+    else
+      render json: { error: "Game not found" }, status: 404
+    end
   end
 
   # GET /games/new

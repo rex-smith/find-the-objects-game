@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
+import axios from "axios";
 
 const Image = (props) => {
   const [showBox, setShowBox] = useState(false);
+  const [characters, setCharacters] = useState([]);
+
+  const API_URL = `/api/v1/games/${props.id}`;
+
+  const loadData = async () => {
+    const response = await axios.get(API_URL);
+    console.log(response.data);
+    setCharacters(response.data);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const handleClick = (e) => {
     let xCoord;

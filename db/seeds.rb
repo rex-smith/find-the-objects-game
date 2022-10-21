@@ -1,70 +1,65 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
 require 'faker'
 
-Game.create(title: 'Bottles', prompt: 'Find the five empty bottles')
-Game[0].characters.create(x_location: 120, y_location: 145)
-Game[0].characters.create(x_location: 120, y_location: 145)
-Game[0].characters.create(x_location: 120, y_location: 145)
-Game[0].characters.create(x_location: 120, y_location: 145)
-Game[0].characters.create(x_location: 120, y_location: 145)
+Game.destroy_all
 
-Game.create(title: 'Businessmen', prompt: 'Find the three owls')
-Game[1].characters.create(x_location: 120, y_location: 145)
-Game[1].characters.create(x_location: 120, y_location: 145)
-Game[1].characters.create(x_location: 120, y_location: 145)
+g = Game.create(title: 'Bottles', prompt: 'Find the five empty bottles')
+g.characters.create(x_location: 820, y_location: 165) # 900x900
+g.characters.create(x_location: 169, y_location: 101)
+g.characters.create(x_location: 427, y_location: 473)
+g.characters.create(x_location: 293, y_location: 799)
+g.characters.create(x_location: 728, y_location: 603)
 
-Game.create(title: 'Chicks', prompt: 'Find the five lemons')
-Game[2].characters.create(x_location: 120, y_location: 145)
-Game[2].characters.create(x_location: 120, y_location: 145)
-Game[2].characters.create(x_location: 120, y_location: 145)
-Game[2].characters.create(x_location: 120, y_location: 145)
-Game[2].characters.create(x_location: 120, y_location: 145)
+g = Game.create(title: 'Businessmen', prompt: 'Find the three owls')
+g.characters.create(x_location: 235, y_location: 709) # 900x900
+g.characters.create(x_location: 134, y_location: 186)
+g.characters.create(x_location: 710, y_location: 741)
 
-Game.create(title: 'Corgis', prompt: 'Find the three breads')
-Game[3].characters.create(x_location: 120, y_location: 145)
-Game[3].characters.create(x_location: 120, y_location: 145)
-Game[3].characters.create(x_location: 120, y_location: 145)
+g = Game.create(title: 'Chicks', prompt: 'Find the five lemons')
+g.characters.create(x_location: 168, y_location: 147) # 900x900
+g.characters.create(x_location: 449, y_location: 278)
+g.characters.create(x_location: 441, y_location: 641)
+g.characters.create(x_location: 799, y_location: 843)
+g.characters.create(x_location: 631, y_location: 516)
 
-Game.create(title: 'Flowers', prompt: 'Find the five butterflies')
-Game[4].characters.create(x_location: 120, y_location: 145)
-Game[4].characters.create(x_location: 120, y_location: 145)
-Game[4].characters.create(x_location: 120, y_location: 145)
-Game[4].characters.create(x_location: 120, y_location: 145)
-Game[4].characters.create(x_location: 120, y_location: 145)
+g = Game.create(title: 'Corgis', prompt: 'Find the three breads')
+g.characters.create(x_location: 693, y_location: 159)
+g.characters.create(x_location: 323, y_location: 543)
+g.characters.create(x_location: 514, y_location: 683)
 
-Game.create(title: 'Kiwis', prompt: 'Find the four kiwi fruits')
-Game[5].characters.create(x_location: 120, y_location: 145)
-Game[5].characters.create(x_location: 120, y_location: 145)
-Game[5].characters.create(x_location: 120, y_location: 145)
-Game[5].characters.create(x_location: 120, y_location: 145)
+g = Game.create(title: 'Flowers', prompt: 'Find the five butterflies')
+g.characters.create(x_location: 248, y_location: 157)
+g.characters.create(x_location: 331, y_location: 511)
+g.characters.create(x_location: 490, y_location: 753)
+g.characters.create(x_location: 738, y_location: 210)
+g.characters.create(x_location: 828, y_location: 714)
 
-Game.create(title: 'Lobsters', prompt: 'Find the four crabs')
-Game[6].characters.create(x_location: 120, y_location: 145)
-Game[6].characters.create(x_location: 120, y_location: 145)
-Game[6].characters.create(x_location: 120, y_location: 145)
-Game[6].characters.create(x_location: 120, y_location: 145)
+g = Game.create(title: 'Kiwis', prompt: 'Find the four kiwi fruits')
+g.characters.create(x_location: 147, y_location: 377)
+g.characters.create(x_location: 593, y_location: 630)
+g.characters.create(x_location: 662, y_location: 411)
+g.characters.create(x_location: 715, y_location: 109)
 
-Game.create(title: 'Tomatoes', prompt: 'Find the three apples')
-Game[7].characters.create(x_location: 120, y_location: 145)
-Game[7].characters.create(x_location: 120, y_location: 145)
-Game[7].characters.create(x_location: 120, y_location: 145)
+g = Game.create(title: 'Lobsters', prompt: 'Find the four crabs')
+g.characters.create(x_location: 155, y_location: 169)
+g.characters.create(x_location: 327, y_location: 483)
+g.characters.create(x_location: 391, y_location: 797)
+g.characters.create(x_location: 829, y_location: 328)
 
-Game.create(title: 'Watermelons', prompt: 'Find the five seedless watermelons')
-Game[8].characters.create(x_location: 120, y_location: 145)
-Game[8].characters.create(x_location: 120, y_location: 145)
-Game[8].characters.create(x_location: 120, y_location: 145)
-Game[8].characters.create(x_location: 120, y_location: 145)
-Game[8].characters.create(x_location: 120, y_location: 145)
+g = Game.create(title: 'Tomatoes', prompt: 'Find the three apples')
+g.characters.create(x_location: 79, y_location: 777)
+g.characters.create(x_location: 463, y_location: 778)
+g.characters.create(x_location: 793, y_location: 240)
+
+g = Game.create(title: 'Watermelons', prompt: 'Find the five seedless watermelons')
+g.characters.create(x_location: 149, y_location: 335)
+g.characters.create(x_location: 291, y_location: 654)
+g.characters.create(x_location: 761, y_location: 626)
+g.characters.create(x_location: 835, y_location: 464)
+g.characters.create(x_location: 852, y_location: 138)
 
 # Build a database of records
-Game.length.times do |i|
+Game.all.each do |selected_game|
   10.times do
-    Game[i].records.create(username: Faker::Name.first_name, time: rand(30.00..120.00))
+    selected_game.records.create(username: Faker::Name.first_name, time: rand(30.00..120.00))
   end
 end
