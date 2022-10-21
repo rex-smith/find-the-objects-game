@@ -2,7 +2,13 @@
 
 * {
   box-sizing: border-box;
-  margin: 0;
+}
+
+:root {
+  --primary-color: hsl(210, 100%, 56%);
+  --primary-color-light: hsl(210, 100%, 80%);
+  --secondary-color: hsl(301, 100%, 42%);
+  --secondary-color-light: hsl(301, 100%, 70%);
 }
 
 a {
@@ -16,21 +22,21 @@ body {
 }
 
 h1 {
-  color: dodgerblue;
+  color: var(--primary-color);
   font-size: 40px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
 h2 {
-  color: dodgerblue;
+  color: var(--secondary-color);
   font-size: 30px;
   font-weight: 600;
   margin-bottom: 7px;
 }
 
 h3 {
-  color: dodgerblue;
+  color: var(--secondary-color);
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 5px;
@@ -46,11 +52,11 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: dodgerblue;
+  background-color: var(--primary-color);
   color: black;
   font-size: 20px;
   margin-bottom: 10px;
-  box-shadow: 0px 0px 5px dodgerblue;
+  box-shadow: 0px 0px 5px var(--primary-color);
 }
 
 .nav-brand {
@@ -74,17 +80,17 @@ nav {
 }
 
 .nav-menu-item {
-  transition: 0.4s ease-in-out;
-  border: 2px solid black;
-  border-radius: 10px;
+  transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  outline: 2px solid white;
+  border-radius: 20px;
   padding: 10px;
   margin: 0px 10px;
+  color: white;
 }
 
 .nav-menu-item:hover {
-  background-color: black;
-  color: dodgerblue;
-  border: 2px solid dodgerblue;
+  color: var(--secondary-color-light);
+  outline: var(--secondary-color-light) solid 2px;
 }
 
 .main-container {
@@ -99,14 +105,14 @@ nav {
   transition: 0.2s ease-in;
   padding: 10px 15px;
   color: white;
-  background-color: dodgerblue;
+  background-color: var(--primary-color);
   border: none;
 }
 
 .button:hover {
-  color: dodgerblue;
+  color: var(--primary-color);
   background-color: white;
-  border: 2px solid dodgerblue;
+  outline: var(--primary-color) solid 2px;
 }
 
 @media screen and (min-width: 500px) {
@@ -152,7 +158,7 @@ nav {
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0px 0px 5px dodgerblue;
+  box-shadow: 0px 0px 5px var(--primary-color);
   position: relative;
   margin-bottom: 20px;
 }
@@ -162,4 +168,8 @@ img {
   max-width: 100%;
   display: block;
   /* object-fit: fit; */
+}
+
+.hidden {
+  display: none;
 }

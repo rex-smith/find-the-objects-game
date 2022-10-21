@@ -2,101 +2,132 @@ import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
 
+const validAreaWidth = 0.05;
+
 const Image = (props) => {
-  const [showBox, setShowBox] = useState(false);
   const [characters, setCharacters] = useState([]);
+  const [hits, setHits] = useState([]);
 
   const API_URL = `/api/v1/games/${props.id}`;
 
   const loadData = async () => {
     const response = await axios.get(API_URL);
-    console.log(response.data);
     setCharacters(response.data);
   };
 
   useEffect(() => {
     loadData();
-  }, []);
+    let newHits = new Array(characters.length).fill(0);
+    setHits(newHits);
+    let box;
+    if (!document.querySelector(".display-box")) {
+      box = document.createElement("div");
+    } else {
+      box = document.querySelector(".display-box");
+    }
+    box.classList.add("display-box", "hidden");
+    box.style.boxSizing = "border-box";
+    box.style.position = "absolute";
+    box.style.border = "2px solid red";
+    let imageContainer = document.getElementById("image-container");
+    imageContainer.appendChild(box);
+  }, [props.image]);
+
+  const coordinatesToPercentages = (e) => {
+    const { top, left, width, height } = e.target.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+    const xPercentage = x / width;
+    const yPercentage = y / height;
+    return { xPercentage, yPercentage };
+  };
 
   const handleClick = (e) => {
-    let xCoord;
-    let yCoord;
-    toggleBox();
-    if (showBox) {
-      hideBox();
+    let imageContainer = document.getElementById("image-container");
+    let imageWidth = imageContainer.getBoundingClientRect().width;
+    const { xPercentage, yPercentage } = coordinatesToPercentages(e);
+    displayBox(xPercentage, yPercentage, imageWidth);
+    processClick(xPercentage, yPercentage); // Process to see if hit or miss and game over
+  };
+
+  const processClick = (xPercentage, yPercentage) => {
+    let newHits = hits;
+    let hit = false;
+    characters.forEach((character, index) => {
+      if (
+        xPercentage >= character.x_location - validAreaWidth / 2 &&
+        xPercentage <= character.x_location + validAreaWidth / 2 &&
+        yPercentage >= character.y_location - validAreaWidth / 2 &&
+        yPercentage <= character.y_location + validAreaWidth / 2
+      ) {
+        console.log("Hit!");
+        newHits[index] = 1;
+        hit = true;
+      }
+    });
+    setHits(newHits);
+    if (hit) {
+      // props.updateScore();
+      displayCorrect(xPercentage, yPercentage);
     } else {
-      xCoord = Math.max(0, e.nativeEvent.offsetX - 25);
-      yCoord = Math.max(0, e.nativeEvent.offsetY - 25);
-      const imageWidth = e.target.clientWidth;
-      const imageHeight = e.target.clientHeight;
-      const width = Math.min(50, imageWidth - xCoord);
-      const height = Math.min(50, imageHeight - yCoord);
-      displayBox(xCoord, yCoord, width, height);
+      // props.updatePenalty();
+      displayWrong(xPercentage, yPercentage);
     }
-    // // Need to check if remaining non-captured characters are within box coordinates
-    // let hit = fetch().then((response) => response.data);
-    // if (hit === true) {
-    //   displayCorrect(xCoord, yCoord);
-    //   // Check if round ended
-    //   let gameOver = fetch().then((response) => response.data);
-    //   if (gameOver === true) {
-    //      props.handleRoundFinish();
-    //   }
-    // } else {
-    //   displayWrong(xCoord, yCoord);
-    //   // Add time penalty
+    // if (newHits.every((hit) => hit === 1)) {
+    //   props.handleRoundFinish();
     // }
   };
 
-  const displayCorrect = (x, y) => {
-    let imageContainer = document.getElementById("image-container");
-    let rightIcon = document.createElement("i");
-    rightIcon.classList.add("fa-solid", "fa-thumbtack");
-    rightIcon.height = "50px";
-    rightIcon.width = "50px";
-    rightIcon.position = "relative";
-    rightIcon.left = `${x - 25}px`;
-    rightIcon.top = `${y - 25}px`;
-    imageContainer.appendChild(rightIcon);
-  };
-
-  const displayWrong = (x, y) => {
-    let imageContainer = document.getElementById("image-container");
-    let wrongIcon = document.createElement("i");
-    wrongIcon.classList.add("fa-solid", "fa-circle-xmark");
-    wrongIcon.height = "50px";
-    wrongIcon.width = "50px";
-    wrongIcon.position = "relative";
-    wrongIcon.left = `${x - 25}px`;
-    wrongIcon.top = `${y - 25}px`;
-    wrongIcon.color = "red";
-    imageContainer.appendChild(wrongIcon);
-  };
-
-  const displayBox = (originX, originY, width, height) => {
-    let box = document.createElement("div");
-    let imageContainer = document.getElementById("image-container");
-    box.style.width = `${width}px`;
-    box.style.height = `${height}px`;
-    box.style.boxSizing = "border-box";
-    box.style.position = "absolute";
-    box.style.top = `${originY}px`;
-    box.style.left = `${originX}px`;
-    box.style.border = "2px solid red";
-    box.className = "display-box";
-
-    imageContainer.appendChild(box);
-  };
-
-  const toggleBox = () => {
-    setShowBox(!showBox);
-  };
-
-  const hideBox = () => {
+  const displayBox = (xPercentage, yPercentage) => {
     let box = document.querySelector(".display-box");
-    if (box) {
-      box.parentElement.removeChild(box);
-    }
+    let originX = Math.max(0, xPercentage - 0.5 * validAreaWidth);
+    let originY = Math.max(0, yPercentage - 0.5 * validAreaWidth);
+    const width = Math.min(validAreaWidth, 100 - xPercentage);
+    const height = Math.min(validAreaWidth, 100 - yPercentage);
+    box.style.width = `${width * 100}%`;
+    box.style.height = `${height * 100}%`;
+    box.style.top = `${originY * 100}%`;
+    box.style.left = `${originX * 100}%`;
+    box.className = "display-box";
+    box.style.zIndex = "1";
+  };
+
+  const displayCorrect = (xPercentage, yPercentage) => {
+    console.log("Displaying hit!");
+    let imageContainer = document.getElementById("image-container");
+    let icon = displayIcon(xPercentage, yPercentage);
+    icon.classList.add("fa-solid", "fa-thumbtack");
+    icon.style.color = "green";
+    icon.font;
+    icon.style.fontSize = `${
+      imageContainer.getBoundingClientRect().width * validAreaWidth
+    }px`;
+    imageContainer.appendChild(icon);
+  };
+
+  const displayIcon = (xPercentage, yPercentage) => {
+    let icon = document.createElement("i");
+    icon.style.height = `${validAreaWidth * 100}%`;
+    icon.style.width = `${validAreaWidth * 100}%`;
+    icon.style.position = "absolute";
+    icon.style.left = `${(xPercentage - validAreaWidth / 2) * 100}%`;
+    icon.style.top = `${(yPercentage - validAreaWidth / 2) * 100}%`;
+    icon.style.textShadow =
+      "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
+    icon.style.zIndex = "1";
+    return icon;
+  };
+
+  const displayWrong = (xPercentage, yPercentage) => {
+    console.log("Displaying miss!");
+    let imageContainer = document.getElementById("image-container");
+    let icon = displayIcon(xPercentage, yPercentage);
+    icon.style.color = "red";
+    icon.style.fontSize = `${
+      imageContainer.getBoundingClientRect().width * validAreaWidth
+    }px`;
+    icon.classList.add("fa-solid", "fa-circle-xmark");
+    imageContainer.appendChild(icon);
   };
 
   return (

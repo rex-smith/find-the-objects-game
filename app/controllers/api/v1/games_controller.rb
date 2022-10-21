@@ -4,6 +4,7 @@ class Api::V1::GamesController < ApplicationController
   # GET /games or /games.json
   def index
     @games = Game.all
+    render json: @games
   end
 
   # GET /games/1 or /games/1.json

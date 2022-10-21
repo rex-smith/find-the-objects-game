@@ -5,12 +5,6 @@ import EndRoundModal from "./EndRoundModal.js";
 import Images from "./images/index";
 import axios from "axios";
 
-// const API_URL = "api/v1/games";
-
-// function getAPIData() {
-//   return axios.get(API_URL).then((response) => response.data);
-// }
-
 const Game = () => {
   const [imageId, setImageId] = useState(1);
   const [image, setImage] = useState(Images[0]);
@@ -23,12 +17,6 @@ const Game = () => {
   };
 
   useEffect(() => {
-    let mounted = true;
-    // getAPIData().then((item) => {
-    //   if (mounted) {
-    //     setImage(item);
-    //   }
-    // });
     setImage(getImage(imageId));
   }, [imageId]);
 
@@ -48,7 +36,7 @@ const Game = () => {
     // Fetch image, character locations
     setRoundOver(false);
     resetTimer();
-    toggleTimer();
+    // toggleTimer();
   };
 
   function toggleTimer() {
