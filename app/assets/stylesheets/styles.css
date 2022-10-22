@@ -70,6 +70,12 @@ nav {
   font-style: italic;
   font-weight: 900;
   font-size: 40px;
+  position: relative;
+}
+
+.brand-punctuation {
+  color: var(--secondary-color);
+  font-size: 1.5em;
 }
 
 .nav-menu {
@@ -84,7 +90,7 @@ nav {
   outline: 2px solid white;
   border-radius: 20px;
   padding: 10px;
-  margin: 0px 10px;
+  margin: 10px 10px;
   color: white;
 }
 
@@ -104,15 +110,29 @@ nav {
   text-align: center;
   transition: 0.2s ease-in;
   padding: 10px 15px;
-  color: white;
-  background-color: var(--primary-color);
   border: none;
 }
 
-.button:hover {
+.button-primary {
+  color: white;
+  background-color: var(--primary-color);
+}
+
+.button-secondary {
+  color: white;
+  background-color: var(--secondary-color);
+}
+
+.button-primary:hover {
   color: var(--primary-color);
   background-color: white;
   outline: var(--primary-color) solid 2px;
+}
+
+.button-secondary:hover {
+  color: var(--secondary-color);
+  background-color: white;
+  outline: var(--secondary-color) solid 2px;
 }
 
 @media screen and (min-width: 500px) {
@@ -172,4 +192,41 @@ img {
 
 .hidden {
   display: none;
+}
+
+/* End Round Modal */
+
+.modal-user-result-table {
+  box-shadow: 0px 0px 5px var(--secondary-color);
+  padding: 20px;
+  margin: 10px auto;
+  width: fit-content;
+}
+
+tr {
+  border-bottom: gray solid 1px;
+}
+
+th {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+td {
+  color: var(--primary-color-light);
+}
+
+td.record-rank {
+  text-align: left;
+  width: 30px;
+}
+
+td.record-name {
+  width: 120px;
+  text-align: left;
+}
+
+td.record-time {
+  width: 70px;
+  text-align: right;
 }

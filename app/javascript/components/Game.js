@@ -5,38 +5,67 @@ import EndRoundModal from "./EndRoundModal.js";
 import Images from "./images/index";
 import axios from "axios";
 
+function headers() {
+  return {
+    "X-CSRF-Token": document.head.querySelector("[name=csrf-token]").content,
+    "Content-Type": "application/json",
+  };
+}
+
 const Game = () => {
   const [imageId, setImageId] = useState(1);
   const [image, setImage] = useState(Images[0]);
   const [roundOver, setRoundOver] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(true);
-
-  const getImage = (id) => {
-    return Images.find((image) => image.id === id - 1);
-  };
+  const [timeResult, setTimeResult] = useState(0);
+  const [recordId, setRecordId] = useState(0);
 
   useEffect(() => {
     setImage(getImage(imageId));
   }, [imageId]);
 
+  const getImage = (id) => {
+    return Images.find((image) => image.id === id - 1);
+  };
+
+  const clearIcons = () => {
+    let icons = document.querySelectorAll(".fa-solid");
+    icons.forEach((icon) => {
+      icon.remove();
+    });
+  };
+
   const handleRoundFinish = () => {
     toggleTimer();
-    // Send result to database first
+    clearIcons();
+    setTimeResult(seconds);
+
+    axios
+      .post(
+        `/api/v1/games/${imageId}/records`,
+        {
+          time: `${timeResult}`,
+          username: "Current User",
+        },
+        { headers: headers() }
+      )
+      .then((response) => {
+        setRecordId(response.data.id);
+      });
+
     setRoundOver(true);
   };
   const nextRound = () => {
-    // Rotate through list of pictures fetching from server by ID
     if (imageId < Images.length - 1) {
       setImageId((imageId) => imageId + 1);
     } else {
       setImageId(1);
     }
-
-    // Fetch image, character locations
+    clearIcons();
     setRoundOver(false);
     resetTimer();
-    // toggleTimer();
+    toggleTimer();
   };
 
   function toggleTimer() {
@@ -75,9 +104,15 @@ const Game = () => {
         handleRoundFinish={handleRoundFinish}
       />
       {roundOver ? (
-        <EndRoundModal timeResult={seconds} nextRound={nextRound} />
+        <EndRoundModal
+          gameId={imageId}
+          recordId={recordId}
+          timeResult={timeResult}
+          nextRound={nextRound}
+          headers={headers}
+        />
       ) : null}
-      <button className="button" onClick={nextRound}>
+      <button className="button button-secondary" onClick={nextRound}>
         Next Picture
       </button>
     </div>

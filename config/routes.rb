@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      get '/games/:id', to: 'games#show'
+      resources :games, only: [:index, :show] do
+        resources :characters, only: [:index]
+        resources :records, only: [:index, :show, :create, :update]
+      end
     end
   end
   
@@ -11,3 +14,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 end
+
+# get '/games/:id', to: 'games#show'

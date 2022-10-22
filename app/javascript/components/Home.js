@@ -18,7 +18,7 @@ const Home = () => {
       </p>
       <h2>Good luck!</h2>
       <NavLink to="game">
-        <div className="button start-game-button">Play Game!</div>
+        <div className="button button-secondary">Play Game!</div>
       </NavLink>
     </div>
   );

@@ -8,17 +8,17 @@ const Image = (props) => {
   const [characters, setCharacters] = useState([]);
   const [hits, setHits] = useState([]);
 
-  const API_URL = `/api/v1/games/${props.id}`;
+  const API_URL = `/api/v1/games/${props.id}/characters`;
 
   const loadData = async () => {
     const response = await axios.get(API_URL);
     setCharacters(response.data);
+    let newHits = new Array(response.data.length).fill(0);
+    setHits(newHits);
   };
 
   useEffect(() => {
     loadData();
-    let newHits = new Array(characters.length).fill(0);
-    setHits(newHits);
     let box;
     if (!document.querySelector(".display-box")) {
       box = document.createElement("div");
@@ -46,7 +46,7 @@ const Image = (props) => {
     let imageContainer = document.getElementById("image-container");
     let imageWidth = imageContainer.getBoundingClientRect().width;
     const { xPercentage, yPercentage } = coordinatesToPercentages(e);
-    displayBox(xPercentage, yPercentage, imageWidth);
+    // displayBox(xPercentage, yPercentage, imageWidth);
     processClick(xPercentage, yPercentage); // Process to see if hit or miss and game over
   };
 
@@ -60,7 +60,6 @@ const Image = (props) => {
         yPercentage >= character.y_location - validAreaWidth / 2 &&
         yPercentage <= character.y_location + validAreaWidth / 2
       ) {
-        console.log("Hit!");
         newHits[index] = 1;
         hit = true;
       }
@@ -73,9 +72,9 @@ const Image = (props) => {
       // props.updatePenalty();
       displayWrong(xPercentage, yPercentage);
     }
-    // if (newHits.every((hit) => hit === 1)) {
-    //   props.handleRoundFinish();
-    // }
+    if (newHits.every((hit) => hit === 1)) {
+      props.handleRoundFinish();
+    }
   };
 
   const displayBox = (xPercentage, yPercentage) => {
@@ -93,7 +92,6 @@ const Image = (props) => {
   };
 
   const displayCorrect = (xPercentage, yPercentage) => {
-    console.log("Displaying hit!");
     let imageContainer = document.getElementById("image-container");
     let icon = displayIcon(xPercentage, yPercentage);
     icon.classList.add("fa-solid", "fa-thumbtack");

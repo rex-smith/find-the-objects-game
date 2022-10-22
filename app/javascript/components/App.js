@@ -8,11 +8,8 @@ function App() {
     <div className="App">
       <nav>
         <div className="nav-brand">
-          {/* <div className="logo">
-            <img src="./components/images/logo.svg" alt="Website Logo" />
-          </div> */}
           <div className="brand-name">
-            Where's Cage<span className="brand-punctuation">?</span>
+            Find the hidden objects<span className="brand-punctuation">!</span>
           </div>
         </div>
         <div className="nav-menu">
