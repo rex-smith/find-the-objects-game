@@ -4,8 +4,6 @@ import "./controllers";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import "./styles/index.css";
-import "../assets/stylesheets/index.css";
 import RouteSwitch from "./components/RouteSwitch";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

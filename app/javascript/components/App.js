@@ -1,20 +1,20 @@
 import { Outlet, NavLink } from "react-router-dom";
 import React from "react";
-// import "./styles/App.css";
-import "../../assets/stylesheets/App.css";
+import "../../assets/stylesheets/reset.css";
+import "../../assets/stylesheets/styles.css";
 
 function App() {
   return (
     <div className="App">
       <nav>
-        <div className="nav-brand">
-          {/* <div className="logo">
-            <img src="./components/images/logo.svg" alt="Website Logo" />
-          </div> */}
-          <div className="brand-name">
-            Where's Cage<span className="brand-punctuation">?</span>
+        <NavLink to="/">
+          <div className="nav-brand">
+            <div className="brand-name">
+              Find the hidden objects
+              <span className="brand-punctuation">!</span>
+            </div>
           </div>
-        </div>
+        </NavLink>
         <div className="nav-menu">
           <NavLink to="/">
             <div className="nav-menu-item">About</div>

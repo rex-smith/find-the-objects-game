@@ -1,0 +1,379 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: hsl(210, 100%, 56%);
+  --primary-color-light: hsl(210, 100%, 80%);
+  --secondary-color: hsl(301, 100%, 42%);
+  --secondary-color-light: hsl(301, 100%, 70%);
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+body {
+  text-align: left;
+  font-family: "Rubik", sans-serif;
+}
+
+h1 {
+  color: var(--primary-color);
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: var(--secondary-color);
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+h3 {
+  color: var(--secondary-color);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+p {
+  color: gray;
+  margin-bottom: 5px;
+  line-height: 24px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  color: black;
+  font-size: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 5px var(--primary-color);
+}
+
+.nav-brand {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.brand-name {
+  font-style: italic;
+  font-weight: 900;
+  font-size: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.brand-punctuation {
+  color: var(--secondary-color);
+  font-size: 1.5em;
+}
+
+.nav-menu {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.nav-menu-item {
+  transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  outline: 2px solid white;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px 10px;
+  color: white;
+}
+
+.nav-menu-item:hover {
+  color: var(--secondary-color-light);
+  outline: var(--secondary-color-light) solid 2px;
+}
+
+.main-container {
+  margin: 0 auto;
+  width: 300px;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 20px;
+  text-align: center;
+  transition: 0.2s ease-in;
+  padding: 10px 15px;
+  border: none;
+}
+
+.button-primary {
+  color: white;
+  background-color: var(--primary-color);
+}
+
+.button-secondary {
+  color: white;
+  background-color: var(--secondary-color);
+}
+
+.button-primary:hover {
+  color: var(--primary-color);
+  background-color: white;
+  outline: var(--primary-color) solid 2px;
+}
+
+.button-secondary:hover {
+  color: var(--secondary-color);
+  background-color: white;
+  outline: var(--secondary-color) solid 2px;
+}
+
+/* Home */
+
+.start-game-box {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.button-start {
+  margin-top: 40px;
+  width: 200px;
+  padding: 20px;
+  border-radius: 30px;
+  font-size: 30px;
+}
+
+/* Game */
+
+.title-timer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.timer-container {
+  display: block;
+  width: 100px;
+  text-align: center;
+  border: 2px solid navy;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.time {
+  font-size: 30px;
+  color: navy;
+  font-style: italic;
+}
+
+.penalty-container {
+  display: block;
+  width: 200px;
+  text-align: center;
+  border: 2px solid maroon;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.penalty {
+  font-size: 30px;
+  color: maroon;
+  font-style: italic;
+}
+
+/* Image */
+
+#image-container {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px var(--primary-color);
+  position: relative;
+  margin-bottom: 20px;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+  display: block;
+  /* object-fit: fit; */
+}
+
+.hidden {
+  display: none;
+}
+
+/* End Round Modal */
+
+.modal {
+  display: block;
+  position: fixed;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
+  width: 75%;
+  max-width: 300px;
+  /* -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s; */
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* @-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+} */
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.modal-user-result-table {
+  box-shadow: 0px 0px 5px var(--secondary-color);
+  padding: 20px;
+  margin: 10px auto;
+  width: fit-content;
+}
+
+tr {
+  border-bottom: gray solid 1px;
+}
+
+th {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+td {
+  color: var(--primary-color-light);
+}
+
+td.record-rank {
+  text-align: left;
+  width: 50px;
+}
+
+td.record-name {
+  width: 150px;
+  text-align: left;
+}
+
+td.record-time {
+  width: 70px;
+  text-align: right;
+}
+
+.username-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  align-self: center;
+}
+
+.modal-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Records */
+
+.records-game-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 10px;
+  border-bottom: var(--secondary-color) solid 1px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.image-preview-container {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 0px 3px gray;
+  margin-bottom: 20px;
+}
+
+/* Responsive Styling */
+
+@media screen and (min-width: 500px) {
+  .main-container {
+    width: 500px;
+  }
+
+  .modal-content {
+    max-width: 500px;
+  }
+
+  .title-timer-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .modal-button-container {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .main-container {
+    width: 900px;
+  }
+}
