@@ -5,14 +5,10 @@ Rails.application.routes.draw do
         resources :characters, only: [:index]
         resources :records, only: [:index, :show, :create, :update]
       end
+      get '/records/top', to: 'records#top'
     end
   end
   
   root 'root#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get '*path' => 'root#index'
 end
-
-# get '/games/:id', to: 'games#show'

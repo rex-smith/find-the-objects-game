@@ -16,10 +16,12 @@ const Home = () => {
         there instead, and you will receive a 10 second time penalty. Once you
         have found all of the objects, your time will be recorded.
       </p>
-      <h2>Good luck!</h2>
-      <NavLink to="game">
-        <div className="button button-secondary">Play Game!</div>
-      </NavLink>
+      <div className="start-game-box">
+        <h2>Good luck!</h2>
+        <NavLink to="game">
+          <div className="button button-secondary button-start">Play Game!</div>
+        </NavLink>
+      </div>
     </div>
   );
 };

@@ -71,6 +71,8 @@ nav {
   font-weight: 900;
   font-size: 40px;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .brand-punctuation {
@@ -135,38 +137,57 @@ nav {
   outline: var(--secondary-color) solid 2px;
 }
 
-@media screen and (min-width: 500px) {
-  .main-container {
-    width: 500px;
-  }
-}
-
-@media screen and (min-width: 900px) {
-  .main-container {
-    width: 900px;
-  }
-}
-
 /* Home */
+
+.start-game-box {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.button-start {
+  margin-top: 40px;
+  width: 200px;
+  padding: 20px;
+  border-radius: 30px;
+  font-size: 30px;
+}
 
 /* Game */
 
 .title-timer-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .timer-container {
   display: block;
   width: 100px;
   text-align: center;
-  border: 2px solid maroon;
+  border: 2px solid navy;
   border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 5px;
 }
 
 .time {
+  font-size: 30px;
+  color: navy;
+  font-style: italic;
+}
+
+.penalty-container {
+  display: block;
+  width: 200px;
+  text-align: center;
+  border: 2px solid maroon;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.penalty {
   font-size: 30px;
   color: maroon;
   font-style: italic;
@@ -196,6 +217,57 @@ img {
 
 /* End Round Modal */
 
+.modal {
+  display: block;
+  position: fixed;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
+  width: 75%;
+  max-width: 300px;
+  /* -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s; */
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* @-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+} */
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
 .modal-user-result-table {
   box-shadow: 0px 0px 5px var(--secondary-color);
   padding: 20px;
@@ -218,15 +290,90 @@ td {
 
 td.record-rank {
   text-align: left;
-  width: 30px;
+  width: 50px;
 }
 
 td.record-name {
-  width: 120px;
+  width: 150px;
   text-align: left;
 }
 
 td.record-time {
   width: 70px;
   text-align: right;
+}
+
+.username-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  align-self: center;
+}
+
+.modal-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Records */
+
+.records-game-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 10px;
+  border-bottom: var(--secondary-color) solid 1px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.image-preview-container {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 0px 3px gray;
+  margin-bottom: 20px;
+}
+
+/* Responsive Styling */
+
+@media screen and (min-width: 500px) {
+  .main-container {
+    width: 500px;
+  }
+
+  .modal-content {
+    max-width: 500px;
+  }
+
+  .title-timer-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .modal-button-container {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .main-container {
+    width: 900px;
+  }
 }

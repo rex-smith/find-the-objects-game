@@ -7,11 +7,14 @@ function App() {
   return (
     <div className="App">
       <nav>
-        <div className="nav-brand">
-          <div className="brand-name">
-            Find the hidden objects<span className="brand-punctuation">!</span>
+        <NavLink to="/">
+          <div className="nav-brand">
+            <div className="brand-name">
+              Find the hidden objects
+              <span className="brand-punctuation">!</span>
+            </div>
           </div>
-        </div>
+        </NavLink>
         <div className="nav-menu">
           <NavLink to="/">
             <div className="nav-menu-item">About</div>

@@ -55,51 +55,58 @@ const EndRoundModal = (props) => {
   };
 
   return (
-    <div className="end-round-modal">
-      <h2>Round Over!</h2>
-      <div>Your time was: {props.timeResult} seconds</div>
-      <div className="modal-results-table">
-        <table></table>
-      </div>
-      <div className="modal-user-result-table">
-        <table>
-          <tbody>
-            <tr className="record-header">
-              <th>Rank</th>
-              <th>Name</th>
-              <th>Time</th>
-            </tr>
-            {topRecords().map((record, index) => {
-              return (
-                <tr key={record.id} className="record-row">
-                  <td className="record-rank">{index + 1}.</td>
-                  <td className="record-name">{record.username}</td>
-                  <td className="record-time">{record.time.toFixed(2)}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      {showForm ? (
-        <form action="" onSubmit={handleSubmit}>
-          <label htmlFor="">Your Name</label>
-          <input type="text" value={name} onChange={handleChange} />
-          <button type="submit" className="button button-primary">
-            Submit
+    <div className="modal">
+      <div className="modal-content">
+        <h2>Round Over!</h2>
+        <div>Your time was: {props.timeResult} seconds</div>
+        <div className="modal-results-table">
+          <table></table>
+        </div>
+        <div className="modal-user-result-table">
+          <table>
+            <tbody>
+              <tr className="record-header">
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Time</th>
+              </tr>
+              {topRecords().map((record, index) => {
+                return (
+                  <tr key={record.id} className="record-row">
+                    <td className="record-rank">{index + 1}.</td>
+                    <td className="record-name">{record.username}</td>
+                    <td className="record-time">{record.time.toFixed(2)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {showForm ? (
+          <form action="" onSubmit={handleSubmit} className="username-form">
+            <div className="field">
+              <label htmlFor="">Your Name</label>
+              <input type="text" value={name} onChange={handleChange} />
+            </div>
+            <button type="submit" className="button button-primary">
+              Submit
+            </button>
+          </form>
+        ) : null}
+        <div className="modal-button-container">
+          <button
+            onClick={props.nextRound}
+            className="button button-secondary "
+          >
+            Next Round
           </button>
-        </form>
-      ) : null}
-      <div className="modal-button-container">
-        <button onClick={props.nextRound} className="button button-secondary ">
-          Next Round
-        </button>
-        <Link to="../records">
-          <button className="button button-secondary">Records</button>
-        </Link>
-        <Link to="../">
-          <button className="button button-secondary">Instructions</button>
-        </Link>
+          <Link to="../records">
+            <button className="button button-secondary">Records</button>
+          </Link>
+          <Link to="../">
+            <button className="button button-secondary">Instructions</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

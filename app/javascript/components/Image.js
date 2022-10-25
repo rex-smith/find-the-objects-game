@@ -66,10 +66,9 @@ const Image = (props) => {
     });
     setHits(newHits);
     if (hit) {
-      // props.updateScore();
       displayCorrect(xPercentage, yPercentage);
     } else {
-      // props.updatePenalty();
+      props.handlePenalty();
       displayWrong(xPercentage, yPercentage);
     }
     if (newHits.every((hit) => hit === 1)) {

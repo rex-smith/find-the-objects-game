@@ -7,6 +7,13 @@ class Api::V1::RecordsController < ApplicationController
     render json: @records
   end
 
+  def top
+    @records = Game.all.map do |game|
+      game.records.order(:time).limit(10)
+    end
+    render json: @records
+  end
+
   def show
     @record = Record.find(params[:id])
     render json: @record
