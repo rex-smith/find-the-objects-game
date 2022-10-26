@@ -1,0 +1,14 @@
+require: rubocop-rails
+
+AllCops:
+  NewCops: enable
+
+inherit_from:
+  - ../.rubocop.yml
+  - node_modules/@prettier/plugin-ruby/rubocop.yml
+
+Style/Encoding:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 99

@@ -1,4 +1,7 @@
-class Api::V1::GamesController < ApplicationController
+# frozen_string_literal: true
+module Api
+  module V1
+  class GamesController < ApplicationController
   before_action :set_game, only: %i[ show edit update destroy ]
 
   # GET /games or /games.json
@@ -12,7 +15,7 @@ class Api::V1::GamesController < ApplicationController
     if @game
       render json: @game.characters
     else
-      render json: { error: "Game not found" }, status: 404
+      render json: { error: "Game not found" }, status: :not_found
     end
   end
 
@@ -73,4 +76,6 @@ class Api::V1::GamesController < ApplicationController
     def game_params
       params.require(:game).permit(:title, :prompt)
     end
+  end
+  end
 end

@@ -1,6 +1,9 @@
-class Api::V1::RecordsController < ApplicationController
-  before_action :set_record, only: %i[ show update ]
-  before_action :get_game, only: %i[ index create ]
+# frozen_string_literal: true
+module Api
+  module V1
+  class RecordsController < ApplicationController
+  before_action :set_record, only: %i[show update]
+  before_action :get_game, only: %i[index create]
 
   def index
     @records = @game.records
@@ -8,9 +11,7 @@ class Api::V1::RecordsController < ApplicationController
   end
 
   def top
-    @records = Game.all.map do |game|
-      game.records.order(:time).limit(10)
-    end
+    @records = Game.all.map { |game| game.records.order(:time).limit(10) }
     render json: @records
   end
 
@@ -37,16 +38,18 @@ class Api::V1::RecordsController < ApplicationController
   end
 
   private
-    def set_record
-      @record = Record.find(params[:id])
-    end
 
-    def get_game
-      @game = Game.find(params[:game_id])
-    end
+  def set_record
+    @record = Record.find(params[:id])
+  end
 
-    def record_params
-      params.require(:record).permit(:game_id, :username, :time)
-    end
+  def get_game
+    @game = Game.find(params[:game_id])
+  end
 
+  def record_params
+    params.require(:record).permit(:game_id, :username, :time)
+  end
+  end
+  end
 end

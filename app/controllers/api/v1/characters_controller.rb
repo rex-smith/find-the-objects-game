@@ -1,4 +1,7 @@
-class Api::V1::CharactersController < ApplicationController
+# frozen_string_literal: true
+module Api
+  module V1
+  class CharactersController < ApplicationController
   before_action :get_game, only: %i[ index ]
 
   def index
@@ -12,4 +15,6 @@ class Api::V1::CharactersController < ApplicationController
     @game = Game.find(params[:game_id])
   end
 
+  end
+  end
 end
